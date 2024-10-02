@@ -48,6 +48,8 @@ end
 require './student'
 
 begin
+
+  
   # Создаем несколько объектов класса Student с различными комбинациями полей
   student1 = Student.new(
     surname: 'Иванов',
