@@ -1,12 +1,24 @@
-# Метод для нахождения суммы цифр числа, делящихся на 3
-def sum_of_digits_divisible_by_3(number)
-  sum = 0
-  number.to_s.chars.map(&:to_i).each do |digit|
-    sum += digit if digit % 3 == 0
+# Метод для нахождения делителя числа, являющегося взаимно простым с наибольшим количеством цифр
+def divisor_with_max_coprime_digits(number)
+  max_coprime_digits_count = 0
+  best_divisor = nil
+
+  (1..number).each do |divisor|
+    next unless number % divisor == 0
+
+    coprime_digits_count = number.to_s.chars.map(&:to_i).count do |digit|
+      gcd(divisor, digit) == 1 && digit != 0
+    end
+
+    if coprime_digits_count > max_coprime_digits_count
+      max_coprime_digits_count = coprime_digits_count
+      best_divisor = divisor
+    end
   end
-  sum
+
+  best_divisor
 end
 
 # Пример использования
-number = 12345
-puts "Сумма цифр числа #{number}, делящихся на 3: #{sum_of_digits_divisible_by_3(number)}"
+number = 210
+puts "Делитель числа #{number}, являющийся взаимно простым с наибольшим количеством цифр: #{divisor_with_max_coprime_digits(number)}"
