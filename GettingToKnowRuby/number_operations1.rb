@@ -19,7 +19,7 @@ def find_first_positive_index(array)
   array.each_with_index do |element, index|
     return index if element > 0
   end
-  nil
+  nil# Возвращаем nil, если положительный элемент не найден
 end
 
 # Метод для чтения массива из файла
