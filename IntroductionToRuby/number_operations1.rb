@@ -25,6 +25,7 @@ end
 # Метод для чтения массива из файла
 def read_array_from_file(file_path)
   begin
+    # puts "Путь к файлу: #{file_path}" # временный вывод для проверки пути
     # Читаем файл, убираем пробелы и перевод строки, превращаем в массив чисел
     File.read(file_path).split.map(&:to_i)
   rescue Errno::ENOENT
@@ -45,6 +46,7 @@ end
 
 method_number = ARGV[0].to_i
 file_path = ARGV[1]
+
 
 # Чтение массива из файла
 array = read_array_from_file(file_path)
