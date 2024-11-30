@@ -80,10 +80,21 @@ methods = {
   3 => { name: "Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр", method: ->(n) { greatest_coprime(n) } }
 }
 
-loop do
+while true
   puts "Выберите метод:"
-  methods.each { |key, value| puts "#{key}: #{value[:name]}" }
+  
+  # Выводим список методов через for
+  for key, value in methods
+    puts "#{key}: #{value[:name]}"
+  end
+
   puts "0: Выход"
+
+  # Добавьте логику выхода, чтобы завершить цикл
+  user_input = gets.chomp
+  break if user_input == "0"
+end
+
 
   choice = gets.to_i
   break if choice == 0
