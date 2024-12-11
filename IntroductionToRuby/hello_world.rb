@@ -1,2 +1,1 @@
-favorite_language = gets.chomp.downcase
-print 'favorite_language'
+puts ("Hello World") #Пишет в консоль Hello World
