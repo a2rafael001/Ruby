@@ -15,7 +15,7 @@ def sum_of_digits_divisible_by_3(number)
 end
 
 # Метод 3: Найти делитель числа, являющийся взаимно простым с наибольшим количеством цифр данного числа
-def coprime_divisor_with_most_digits(number)
+def coprime_divisor_with_most_digits(number) 
   digits = number.to_s.chars.map(&:to_i)
   max_coprimes_count = 0
   best_divisor = nil
