@@ -9,9 +9,9 @@ def zvuk_zivotnogo(tip_ziv,name)
 end
 
 def dvizenie(tip_ziv,name,mesto)
-	if tip_ziv=="птичка"
+	if tip_ziv== "Птичка"
 		puts "#{name},летит в #{mesto},когда наступает холода"
-	elsif tip_ziv=="собака"
+	elsif tip_ziv== "Собака"
 		 puts "#{name},встречает #{mesto},когда приходят гости "
 		elsif tip_ziv== "Кошка"
 			puts "#{name}, игарется #{mesto}"
@@ -23,5 +23,6 @@ def dvizenie(tip_ziv,name,mesto)
 	end
 
 	zvuk_zivotnogo("Птичка","Гоша")
-	dvizenie("Собака","Рекс","у входа")
+	dvizenie("Собака", "Рекс", "у входа")
 	vozrast("Адель",4)
+
