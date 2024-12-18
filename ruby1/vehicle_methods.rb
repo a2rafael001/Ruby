@@ -18,7 +18,7 @@ zvuk_signal
 fari ("дальный свет")
 
 def probeg (proydeniy_mil,isp_topliva)
-	return proydeniy_mil/isp_topliva
+	 proydeniy_mil/isp_topliva
 end
 
 probeg_puti=probeg(400,12)

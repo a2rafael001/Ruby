@@ -1,9 +1,19 @@
 class Dog
-  def zvuk
-    puts "gav-gav"
+
+  def dog_name
+    @name= "Rex"
   end
-  def mesto(n)
-    puts " begu k #{n}"
+  def zvuk
+    puts "#{@name} govorit gav-gav"
+  end
+  def mesto( bezit)
+    puts "#{@name} bezit k #{bezit}"
+  end
+  def dog_age
+    @age = 5
+  end
+  def vozrast
+    puts "#{@name}, seychas #{@age} let"
   end
 end
 class ZolotayaRibka
@@ -15,21 +25,64 @@ class ZolotayaRibka
   end
 end
 class  Tigr
+  def tigr_name
+    @name= "Abuzik"
+  end
   def zvuk
-    puts "rrr"
+    puts "#{@name} govorit r-r-r"
   end
   def mesto(n)
-    puts "V jungliax #{n} ya zivu"
+    puts "#{@name} V jungliax #{n}  zivet"
+  end
+  def tigr_age
+    @age =7
+  end
+  def vozrast
+    puts "#{@name}, seychas #{@age} let"
   end
 end
 
-dog=Dog.new
-zolotaya_ribka=ZolotayaRibka.new
-tigr=Tigr.new
+class MyClass
+  def metod_zapis=(new_value)
+    @metod_zapis = new_value
+  end
+  def metod_zapis
+    @metod_zapis
+  end
+end
 
+noviy = MyClass.new
+noviy.metod_zapis = "A vot i perviy Gettr i Settr"
+puts noviy.metod_zapis
+
+dog=Dog.new
+dog.dog_name
 dog.zvuk
 dog.mesto("xozyainu")
+dog.dog_age
+dog.vozrast
+zolotaya_ribka=ZolotayaRibka.new
 zolotaya_ribka.zvuk
 zolotaya_ribka.mesto("Oleg")
+tigr=Tigr.new
+tigr.tigr_name
 tigr.zvuk
 tigr.mesto("amazona")
+tigr.tigr_age
+tigr.vozrast
+
+class Dogs
+  attor_accorer: name, :age 
+  def soobshenie
+    puts "#{@name}, seychas #{age} let"
+  end
+end
+
+rex =Dogs.new 
+rex.name = "Rex"
+rex.age = 4
+morti =Dogs.new 
+morti.name ="Morti"
+morti.age = 9
+rex.soobshenie
+morti.soobshenie
