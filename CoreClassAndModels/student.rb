@@ -18,9 +18,14 @@ class Student
     "#{last_name} #{first_name} #{middle_name}"
   end
 
-  # Переопределение метода to_s для удобного вывода информации
-  def to_s
-    "ID: #{id}\nФИО: #{full_name}\nТелефон: #{phone || 'не указано'}\n" \
-    "Телеграм: #{telegram || 'не указано'}\nПочта: #{email || 'не указано'}\nГит: #{github || 'не указано'}"
+
+  def puts_info
+    puts "ID: #{@id}"
+    puts "ФИО: #{@last_name} #{@first_name} #{@middle_name}"
+    puts "Телефон: #{@phone || 'не указано'}"
+    puts "Телеграм: #{@telegram || 'не указано'}"
+    puts "Почта: #{@email || 'не указано'}"
+    puts "Гит: #{@github || 'не указано'}"
+    puts "-" * 20
   end
 end
