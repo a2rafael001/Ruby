@@ -1,31 +1,27 @@
 class Student
-  attr_accessor :id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :github
+  ATRIBUTI = [:id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :github]
+  attr_accessor(*ATRIBUTI)
 
-  # Конструктор: обязательные ФИО, остальные поля опциональны
-  def initialize(id:, last_name:, first_name:, middle_name:, phone: nil, telegram: nil, email: nil, github: nil)
-    @id = id
-    @last_name = last_name
-    @first_name = first_name
-    @middle_name = middle_name
-    @phone = phone
-    @telegram = telegram
-    @email = email
-    @github = github
+  # Конструктор
+  def initialize(**argument)
+    ATRIBUTI.each do |attr|
+      self.send("#{attr}=", argument[attr])
+    end
   end
 
-  # Метод для получения полного имени студента
   def full_name
     "#{last_name} #{first_name} #{middle_name}"
   end
 
-
   def puts_info
-    puts "ID: #{@id}"
-    puts "ФИО: #{@last_name} #{@first_name} #{@middle_name}"
-    puts "Телефон: #{@phone || 'не указано'}"
-    puts "Телеграм: #{@telegram || 'не указано'}"
-    puts "Почта: #{@email || 'не указано'}"
-    puts "Гит: #{@github || 'не указано'}"
-    puts "-" * 20
+    puts <<~INFO
+      ID: #{id || 'не указано'}
+      ФИО: #{full_name}
+      Телефон: #{phone || 'не указано'}
+      Телеграм: #{telegram || 'не указано'}
+      Почта: #{email || 'не указано'}
+      Гит: #{github || 'не указано'}
+      #{'-' * 20}
+    INFO
   end
 end
