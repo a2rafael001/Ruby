@@ -1,16 +1,19 @@
-class Student
-  ATRIBUTI = [:id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :github]
+require_relative 'person'
+
+class Student < Person
+  ATRIBUTI = [:id, :last_name, :first_name, :middle_name, :telegram, :email, :github]
   attr_accessor(*ATRIBUTI)
 
   # Конструктор
   def initialize(**argument)
+    super(phone: argument[:phone]) # Передаем телефон в родительский конструктор
     ATRIBUTI.each do |attr|
       self.send("#{attr}=", argument[attr])
     end
   end
 
   def full_name
-    "#{last_name} #{first_name} #{middle_name}"
+    "#{last_name} #{first_name[0]}. #{middle_name[0]}."
   end
 
   def puts_info
