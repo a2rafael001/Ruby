@@ -37,11 +37,12 @@ student3.puts_info
 
 # Попытка изменить телефон на некорректный
 begin
-  student1.phone = "invalid_phone"
+  student1.set_contacts(phone: "valid_phone")
+   student3.set_contacts(email: "invalid_email")
 rescue ArgumentError => e
   puts e.message
 end
 
 # Проверка номера через метод класса Person
-#puts  Person.valid_phone?("+12345678901") # => true
-#puts  Person.valid_phone?("12345")       # => false
+puts  Person.valid_phone?("+12345678901") # => true
+puts  Person.valid_phone?("12345")       # => false
