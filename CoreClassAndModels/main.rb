@@ -20,6 +20,7 @@ begin
     middle_name: "Петрович",
     phone: "12345"
   )
+  student2.puts_info
 rescue ArgumentError => e
   puts e.message
 end
@@ -29,7 +30,8 @@ student3 = Student.new(
   id: 3,
   last_name: "Арутюнян",
   first_name: "Рафаэль",
-  middle_name: "Гарегинович"
+  middle_name: "Гарегинович",
+  github: "https://github.com/a2rafael001"
 )
 student3.puts_info
 
