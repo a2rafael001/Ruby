@@ -64,4 +64,22 @@ class Person
       raise ArgumentError, "Invalid GitHub URL: #{value}"
     end
   end
+
+  # Проверка наличия GitHub
+  def validate_github
+    raise ArgumentError, "Требуется GitHub" if github.nil? || github.strip.empty?
+  end
+
+  # Проверка наличия хотя бы одного контакта
+  def validate_contacts
+    if phone.nil? && email.nil? && telegram.nil?
+      raise ArgumentError, "Требуется как минимум один контакт (телефон, email или Telegram)."
+    end
+  end
+
+  # Общая валидация
+  def validate
+    validate_github
+    validate_contacts
+  end
 end

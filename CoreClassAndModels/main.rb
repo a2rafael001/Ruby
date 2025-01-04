@@ -43,5 +43,5 @@ rescue ArgumentError => e
 end
 
 # Проверка номера через метод класса Person
-puts  Person.valid_phone?("+12345678901") # => true
-puts  Person.valid_phone?("12345")       # => false
+#puts  Person.valid_phone?("+12345678901") # => true
+#puts  Person.valid_phone?("12345")       # => false
