@@ -72,7 +72,18 @@ tigr.tigr_age
 tigr.vozrast
 
 class Dogs
-  attor_accorer: name, :age 
+  def name=(value)
+    @name=value
+  end
+  def name
+    @name
+  end
+  def age=(value)
+    @age=value
+  end
+  def age
+    @age
+  end
   def soobshenie
     puts "#{@name}, seychas #{age} let"
   end
@@ -86,3 +97,10 @@ morti.name ="Morti"
 morti.age = 9
 rex.soobshenie
 morti.soobshenie
+
+class Penis
+attr_accessor :name
+end
+name=Penis.new 
+name.name ="dk"
+puts name.name
