@@ -35,14 +35,21 @@ student3 = Student.new(
 )
 student3.puts_info
 
+# Создание объекта с использованием строки
+student4 = Student.from_string("4, Сидоров, Сергей, Сергеевич, +98765432100, @sidorov, sidorov@mail.com, https://github.com/sidorov")
+student4.puts_info
+
 # Попытка изменить телефон на некорректный
 begin
+  student5 = Student.from_string("5, Кузнецов, Иван") # Недостаточно данных
+  student5.puts_info
   student1.set_contacts(phone: "valid_phone")
    student3.set_contacts(email: "invalid_email")
 rescue ArgumentError => e
   puts e.message
 end
-
+student6 = Student.from_string("6, Смирнов, Дмитрий, Алексеевич")
+student6.puts_info
 # Проверка номера через метод класса Person
 puts  Person.valid_phone?("+12345678901") # => true
 puts  Person.valid_phone?("12345")       # => false

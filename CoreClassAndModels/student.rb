@@ -6,10 +6,27 @@ class Student < Person
 
   # Конструктор
   def initialize(**argument)
-    super(phone: argument[:phone]) # Передаем телефон в родительский конструктор
+    super(phone: argument[:phone])
     ATRIBUTI.each do |attr|
       self.send("#{attr}=", argument[attr])
     end
+  end
+
+  # Конструктор, принимающий строку
+  def self.from_string(string)
+    data = string.split(',').map(&:strip) # Разделяем строку по запятым и убираем пробелы
+    raise ArgumentError, "Invalid input string" if data.size < 4 # Минимум 4 обязательных параметра (ID и ФИО)
+
+    self.new(
+      id: data[0].to_i,
+      last_name: data[1],
+      first_name: data[2],
+      middle_name: data[3],
+      phone: data[4],
+      telegram: data[5],
+      email: data[6],
+      github: data[7]
+    )
   end
 
   def full_name
