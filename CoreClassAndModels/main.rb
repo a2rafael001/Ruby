@@ -1,4 +1,5 @@
 require_relative 'student'
+require_relative 'student_short'
 
 # Создание объекта с корректным телефоном
 student1 = Student.new(
@@ -43,6 +44,13 @@ puts student4.getInfo
 student5 = Student.from_string("3, Сидоров, Сергей, Сергеевич")
 puts student5.getInfo
 
+# Создание объекта StudentShort через первый конструктор
+short1 = StudentShort.new(student1)
+puts short1
+
+# Создание объекта StudentShort через второй конструктор
+short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov, Телефон: +98765432100")
+puts short2
 # Проверка отдельных значений
 puts "ФИО: #{student1.get_full_name_initials}"
 puts "GitHub: #{student1.get_github}"
