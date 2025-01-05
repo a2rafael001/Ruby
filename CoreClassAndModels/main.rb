@@ -9,7 +9,7 @@ student1 = Student.new(
   phone: "+12345678901",
   email: "ivanov@mail.com"
 )
-student1.puts_info
+puts student1.getInfo
 
 # Создание объекта с некорректным телефоном
 begin
@@ -20,7 +20,7 @@ begin
     middle_name: "Петрович",
     phone: "12345"
   )
-  student2.puts_info
+  puts student2.getInfo
 rescue ArgumentError => e
   puts e.message
 end
@@ -33,23 +33,21 @@ student3 = Student.new(
   middle_name: "Гарегинович",
   github: "https://github.com/a2rafael001"
 )
-student3.puts_info
+puts student3.getInfo
 
 # Создание объекта с использованием строки
-student4 = Student.from_string("4, Сидоров, Сергей, Сергеевич, +98765432100, @sidorov, sidorov@mail.com, https://github.com/sidorov")
-student4.puts_info
+student4 = Student.from_string("2, Петров, Петр, Петрович, +98765432100, @petrov, petrov@mail.com, https://github.com/petrov")
+puts student4.getInfo
 
-# Попытка изменить телефон на некорректный
-begin
-  student5 = Student.from_string("5, Кузнецов, Иван") # Недостаточно данных
-  student5.puts_info
-  student1.set_contacts(phone: "valid_phone")
-   student3.set_contacts(email: "invalid_email")
-rescue ArgumentError => e
-  puts e.message
-end
-student6 = Student.from_string("6, Смирнов, Дмитрий, Алексеевич")
-student6.puts_info
-# Проверка номера через метод класса Person
-puts  Person.valid_phone?("+12345678901") # => true
-puts  Person.valid_phone?("12345")       # => false
+# Создание объекта с минимальными данными
+student5 = Student.from_string("3, Сидоров, Сергей, Сергеевич")
+puts student5.getInfo
+
+# Проверка отдельных значений
+puts "ФИО: #{student1.get_full_name_initials}"
+puts "GitHub: #{student1.get_github}"
+puts "Основной контакт: #{student1.get_primary_contact}"
+
+# Проверка метода класса Person для валидности телефона
+puts Person.valid_phone?("+12345678901") # => true
+puts Person.valid_phone?("12345")       # => false
