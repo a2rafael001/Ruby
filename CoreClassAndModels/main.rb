@@ -1,5 +1,7 @@
+require_relative 'person'
 require_relative 'student'
 require_relative 'student_short'
+
 
 # Создание объекта с корректным телефоном
 student1 = Student.new(
@@ -42,7 +44,8 @@ puts student4.getInfo
 
 # Создание объекта с минимальными данными
 student5 = Student.from_string("3, Сидоров, Сергей, Сергеевич")
-puts student5.getInfo
+ student5.getInfo
+
 
 # Создание объекта StudentShort через первый конструктор
 short1 = StudentShort.new(student1)
@@ -58,4 +61,5 @@ puts "Основной контакт: #{student1.get_primary_contact}"
 
 # Проверка метода класса Person для валидности телефона
 puts Person.valid_phone?("+12345678901") # => true
+
 puts Person.valid_phone?("12345")       # => false

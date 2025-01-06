@@ -72,4 +72,23 @@ class Person
     validate_github
     validate_contacts
   end
+
+
+  # Метод, возвращающий контакт в «человеческом» виде
+  def primary_contact_info
+    if phone
+      "Телефон: #{phone}"
+    elsif email
+      "Почта: #{email}"
+    elsif telegram
+      "Телеграм: #{telegram}"
+    else
+      "Контакт не указан"
+    end
+  end
+
+  # Метод, возвращающий GitHub или "не указан"
+  def github_or_placeholder
+    github || 'не указан'
+  end
 end
