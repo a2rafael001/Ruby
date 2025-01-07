@@ -1,44 +1,67 @@
-class Dog
+class Zivotnie
+  attr_reader :name, :age
 
-  def dog_name
-    @name= "Rex"
+  def name=(value)
+    raise "Имя не может быть пустым!" if value == ""
+    @name = value
   end
+
+  def age=(value)
+    raise "Возраст #{value} недействителен!" if value < 0
+    @age = value
+  end
+
   def zvuk
-    puts "#{@name} govorit gav-gav"
+    puts "#{@name} говорит гав-гав"
   end
-  def mesto( bezit)
-    puts "#{@name} bezit k #{bezit}"
+
+  def mesto(bezit)
+    puts "#{@name} бежит к #{bezit}"
   end
-  def dog_age
-    @age = 5
-  end
+
   def vozrast
-    puts "#{@name}, seychas #{@age} let"
+    puts "#{@name}, сейчас #{@age} лет"
   end
 end
-class ZolotayaRibka
+
+class Dog < Zivotnie
+  def to_s
+ "#{@name} это собака , ему сейчас #{age}"
+   end
   def zvuk
-    puts "Ya ispolnoyu 3 tvoi zelania"
+   super
+    puts "Я укушу тебя!"
+   end
+
+end
+
+
+
+class ZolotayaRibka < Zivotnie
+  def zvuk
+    puts "Я исполню 3 твоих желания"
   end
+
   def mesto(n)
-    puts "Otpusti menya #{n}"
+    puts "Отпусти меня, #{n}"
   end
 end
-class  Tigr
+
+class Tigr < Zivotnie
   def tigr_name
-    @name= "Abuzik"
+    self.name = "Абузик"
   end
+
   def zvuk
-    puts "#{@name} govorit r-r-r"
+    puts "#{@name} говорит р-р-р"
   end
+
   def mesto(n)
-    puts "#{@name} V jungliax #{n}  zivet"
+    puts "#{@name} живет в джунглях #{n}"
   end
+
   def tigr_age
-    @age =7
-  end
-  def vozrast
-    puts "#{@name}, seychas #{@age} let"
+    self.age = 7
   end
 end
 
@@ -46,61 +69,39 @@ class MyClass
   def metod_zapis=(new_value)
     @metod_zapis = new_value
   end
+
   def metod_zapis
     @metod_zapis
   end
 end
 
+# Тестирование методов
+dog = Dog.new
+dog.name = "Рекс"
+dog.age = 5
+puts dog
+
+puts "\nТестирование методов:"
+puts "Метод to_s: #{dog.to_s}"                             # Преобразует объект в строку
+puts "Метод inspect: #{dog.inspect}"                       # Строковое представление для отладки
+puts "Метод class: #{dog.class}"                           # Возвращает класс объекта
+puts "Метод methods: #{dog.methods.sort}"                  # Список методов объекта
+puts "Метод instance_variables: #{dog.instance_variables}" # Список переменных экземпляра
+
+dog.mesto("хозяину")
+# Тестирование
 noviy = MyClass.new
-noviy.metod_zapis = "A vot i perviy Gettr i Settr"
+noviy.metod_zapis = "А вот и первый геттер и сеттер"
 puts noviy.metod_zapis
 
-dog=Dog.new
-dog.dog_name
-dog.zvuk
-dog.mesto("xozyainu")
-dog.dog_age
-dog.vozrast
-zolotaya_ribka=ZolotayaRibka.new
+zolotaya_ribka = ZolotayaRibka.new
+zolotaya_ribka.name = "Золотая рыбка"
 zolotaya_ribka.zvuk
-zolotaya_ribka.mesto("Oleg")
-tigr=Tigr.new
+zolotaya_ribka.mesto("Олег")
+
+tigr = Tigr.new
 tigr.tigr_name
 tigr.zvuk
-tigr.mesto("amazona")
+tigr.mesto("Амазона")
 tigr.tigr_age
 tigr.vozrast
-
-class Dogs
-  def name=(value)
-    @name=value
-  end
-  def name
-    @name
-  end
-  def age=(value)
-    @age=value
-  end
-  def age
-    @age
-  end
-  def soobshenie
-    puts "#{@name}, seychas #{age} let"
-  end
-end
-
-rex =Dogs.new 
-rex.name = "Rex"
-rex.age = 4
-morti =Dogs.new 
-morti.name ="Morti"
-morti.age = 9
-rex.soobshenie
-morti.soobshenie
-
-class Penis
-attr_accessor :name
-end
-name=Penis.new 
-name.name ="dk"
-puts name.name
