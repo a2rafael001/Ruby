@@ -1,8 +1,7 @@
 require_relative 'person'
 
 class Student < Person
-  ATTRIBUTES = [:id, :last_name, :first_name, :middle_name,
-                :phone, :telegram, :email, :github]
+  ATTRIBUTES = [:id, :last_name, :first_name, :middle_name, :phone, :telegram, :email, :github]
   attr_accessor(*ATTRIBUTES)
 
   # Основной конструктор
@@ -23,7 +22,7 @@ class Student < Person
   # Конструктор, принимающий строку
   def self.from_string(data)
     fields = data.split(", ").map(&:strip)
-    raise ArgumentError, "Insufficient data to create Student" if fields.size < 3
+    raise ArgumentError, "Недостаточно данных для создания объекта Student" if fields.size < 3
 
     argument = {
       id:          fields[0].to_i,
@@ -41,7 +40,9 @@ class Student < Person
 
   # Метод для получения краткой информации о студенте
   def getInfo
-    "#{full_name_initials}, Гит: #{github_or_placeholder}, Связь: #{primary_contact_info}"
+    email_info = email ? email : 'не указана'
+
+    "#{full_name_initials}, Гит: #{github_or_placeholder}, Почта: #{email_info}, Контакт: #{primary_contact_info}"
   end
 
   # Методы для получения отдельных значений без возможности изменения

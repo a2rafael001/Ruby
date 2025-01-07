@@ -10,7 +10,7 @@ student1 = Student.new(
   first_name: "Иван",
   middle_name: "Иванович",
   phone: "+12345678901",
-  email: "ivanov@mail.com"
+
 )
 puts student1.getInfo
 
@@ -49,10 +49,10 @@ student5 = Student.from_string("3, Сидоров, Сергей, Сергеев�
 
 # Создание объекта StudentShort через первый конструктор
 short1 = StudentShort.new(student1)
-puts short1
+puts short1.to_s
 
 # Создание объекта StudentShort через второй конструктор
-short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov, Телефон: +98765432100")
+short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov,  +98765432100")
 puts short2
 # Проверка отдельных значений
 puts "ФИО: #{student1.get_full_name_initials}"

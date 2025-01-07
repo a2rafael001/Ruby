@@ -77,13 +77,13 @@ class Person
   # Метод, возвращающий контакт в «человеческом» виде
   def primary_contact_info
     if phone
-      "Телефон: #{phone}"
+      " #{phone}"
     elsif email
       "Почта: #{email}"
     elsif telegram
       "Телеграм: #{telegram}"
     else
-      "Контакт не указан"
+      " не указан"
     end
   end
 
