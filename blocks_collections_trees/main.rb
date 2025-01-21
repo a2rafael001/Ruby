@@ -1,5 +1,3 @@
-# main.rb
-
 # Метод для подсчёта количества элементов массива array,которые попадают в интервал [a..b].
 def count_elements_in_interval(array, a, b)
   array.count { |x| x >= a && x <= b }
