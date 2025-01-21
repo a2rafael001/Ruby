@@ -36,6 +36,7 @@ class Person
     end
   end
 
+
   # Метод для установки контактов
   def set_contacts(phone: nil, email: nil, telegram: nil)
     if phone && !Person.valid_phone?(phone)
@@ -77,7 +78,7 @@ class Person
   # Метод, возвращающий контакт в «человеческом» виде
   def primary_contact_info
     if phone
-      " #{phone}"
+      "контакт: #{phone}"
     elsif email
       "Почта: #{email}"
     elsif telegram

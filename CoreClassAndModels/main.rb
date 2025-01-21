@@ -52,7 +52,7 @@ short1 = StudentShort.new(student1)
 puts short1.to_s
 
 # Создание объекта StudentShort через второй конструктор
-short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov,  +98765432100")
+short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov, petrov@mail.com, +98765432100")
 puts short2
 # Проверка отдельных значений
 puts "ФИО: #{student1.get_full_name_initials}"

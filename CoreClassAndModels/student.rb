@@ -42,7 +42,7 @@ class Student < Person
   def getInfo
     email_info = email ? email : 'не указана'
 
-    "#{full_name_initials}, Гит: #{github_or_placeholder}, Почта: #{email_info}, Контакт: #{primary_contact_info}"
+    "ID #{id},ФИО: #{full_name_initials}, Гит: #{github_or_placeholder}, Почта: #{email_info}, Контакт: #{primary_contact_info}"
   end
 
   # Методы для получения отдельных значений без возможности изменения
