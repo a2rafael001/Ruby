@@ -26,3 +26,13 @@ def custom_one?
     count == 1
   end
 end
+
+def custom_inject(initial = nil)
+    accumulator = initial || @array.first
+    start_index = initial.nil? ? 1 : 0
+    @array[start_index..].each do |element|
+      accumulator = yield(accumulator, element)
+    end
+    accumulator
+  end
+end
