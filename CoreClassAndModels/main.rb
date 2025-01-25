@@ -2,64 +2,74 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'student_short'
 
+# Создание объекта Person
+puts "  Проверка класса Person\n  "
 
-# Создание объекта с корректным телефоном
-student1 = Student.new(
-  id: 1,
-  last_name: "Иванов",
-  first_name: "Иван",
-  middle_name: "Иванович",
-  phone: "+12345678901",
+person = Person.new(id: 1, git: "https://github.com/example")
+puts "GitHub: #{person.git}"
+puts "ID: #{person.id}"
+puts "GitHub   проверяю на валидацию: #{Person.valid_git?(person.git)}"
+puts "Телефон  проверяю на валидацию: #{Person.valid_phone?('+12345678901')}"
+puts "Email    проверяю на валидацию: #{Person.valid_email?('example@mail.com')}"
+puts "Telegram проверяю на валидацию: #{Person.valid_telegram?('@example')}"
 
-)
-puts student1.getInfo
-
-# Создание объекта с некорректным телефоном
+# Создание объекта Student
+puts "\n  Проверка класса Student \n "
 begin
-  student2 = Student.new(
+  student = Student.new(
     id: 2,
-    last_name: "Петров",
-    first_name: "Петр",
-    middle_name: "Петрович",
-    phone: "12345"
+    last_name: "Иванов",
+    first_name: "Иван",
+    middle_name: "Иванович",
+    phone: "+12345678901",
+    email: "ivanov@mail.com",
+    telegram: "@ivanov",
+    git: "https://github.com/ivanov"
   )
-  puts student2.getInfo
+  puts student.to_s
+  puts "ФИО с инициалами: #{student.full_name_initials}"
+  puts "Контактная информация: #{student.contact_info}"
 rescue ArgumentError => e
-  puts e.message
+  puts "Ошибка: #{e.message}"
 end
 
-# Создание объекта без телефона (студент 3)
-student3 = Student.new(
-  id: 3,
-  last_name: "Арутюнян",
-  first_name: "Рафаэль",
-  middle_name: "Гарегинович",
-  github: "https://github.com/a2rafael001"
-)
-puts student3.getInfo
+# Проверка метода set_contacts
+puts "\nПроверка метода set_contacts\n"
+begin
+  student.set_contacts(phone: "+98765432100", email: "newemail@mail.com")
+  puts "Обновлённая контактная информация: #{student.contact_info}"
+rescue ArgumentError => e
+  puts "Ошибка: #{e.message}"
+end
 
-# Создание объекта с использованием строки
-student4 = Student.from_string("2, Петров, Петр, Петрович, +98765432100, @petrov, petrov@mail.com, https://github.com/petrov")
-puts student4.getInfo
+# Создание объекта StudentShort из объекта Student
+puts "\nПроверка класса StudentShort\n"
+puts "\nПроверка метода from_student\n"from_student
+student_short = StudentShort.from_student(student)
+puts student_short.to_s
 
-# Создание объекта с минимальными данными
-student5 = Student.from_string("3, Сидоров, Сергей, Сергеевич")
- student5.getInfo
+# Создание объекта StudentShort из строки
+puts "\nПроверка метода from_string"
+begin
+  student_short_from_string = StudentShort.from_string(
+    3,
+    "Петров П. П., https://github.com/petrov, petrov@mail.com, +98765432100"
+  )
+  puts student_short_from_string.to_s
+rescue ArgumentError => e
+  puts "Ошибка: #{e.message}"
+end
 
+# Проверка валидности данных
+puts "\nПроверка валидности данных"
+puts "GitHub   проверяю на валидацию: #{Person.valid_git?('https://github.com/invalid-url')}"
+puts "Телефон  проверяю на валидацию: #{Person.valid_phone?('12345')}"
+puts "Email    проверяю на валидацию: #{Person.valid_email?('invalid_email')}"
+puts "Telegram проверяю на валидацию: #{Person.valid_telegram?('invalid_telegram')}"
 
-# Создание объекта StudentShort через первый конструктор
-short1 = StudentShort.new(student1)
-puts short1.to_s
+# Проверка метода validate?
+puts "\nПроверка метода validate?\n"
+puts "Данные валидны? #{student.validate?}"
 
-# Создание объекта StudentShort через второй конструктор
-short2 = StudentShort.from_string(2, "Петров П. П., https://github.com/petrov, petrov@mail.com, +98765432100")
-puts short2
-# Проверка отдельных значений
-puts "ФИО: #{student1.get_full_name_initials}"
-puts "GitHub: #{student1.get_github}"
-puts "Основной контакт: #{student1.get_primary_contact}"
-
-# Проверка метода класса Person для валидности телефона
-puts Person.valid_phone?("+12345678901") # => true
-
-puts Person.valid_phone?("12345")       # => false
+# Итог
+puts "\n=== Все методы успешно проверены ==="

@@ -1,43 +1,36 @@
-require_relative 'person'
-require_relative 'student'
-
 class StudentShort < Person
-  attr_reader :id, :full_name_initials, :github,  :contact
+  attr_reader :full_name_initials, :contact
 
-  # Конструктор 1: принимает объект класса Student
-  def initialize(student)
-    @id                  = student.id
-    @full_name_initials  = student.full_name_initials
-    # Вместо github || 'не указан' используем метод из Person
-    @github              = student.github_or_placeholder
-    # Вместо ручной логики — используем метод из Person
-    @contact             = student.primary_contact_info
+  def initialize(full_name_initials, id: nil, git: nil, contact: nil)
+    super(id: id, git: git)
+    @full_name_initials = full_name_initials
+    @contact = contact
   end
 
-  # Конструктор 2: принимает ID и строку с остальной информацией
-  def self.from_string(id, data)
-    fields = data.split(", ").map(&:strip)
-    raise ArgumentError, "Недостаточно данных для создания объекта Student" if fields.size < 2
+  # Конструктор 1: Создание из объекта Student
+  def self.from_student(student)
+    new(
+      student.full_name_initials,
+      id: student.id,
+      git: student.git,
+      contact: student.contact_info
+    )
+  end
 
-    full_name_initials = fields[0]
-    github             = fields[1] || 'не указан' 
-    contact            = fields[2] || 'не указан'  
+  # Конструктор 2: Создание из строки
+  def self.from_string(id, info_string)
+    fields = info_string.split(', ').map(&:strip)
+    raise ArgumentError, 'Недостаточно данных для создания объекта StudentShort' if fields.size < 3
 
-    new_instance = allocate
-    new_instance.send(:initialize_from_data, id, full_name_initials, github,  contact)
-    new_instance
+    new(
+      fields[0], # full_name_initials
+      id: id,
+      git: fields[1], # GitHub
+      contact: fields[2..].join(', ') # Остальные поля как контактная информация
+    )
   end
 
   def to_s
-        "ID: #{id}, ФИО: #{full_name_initials}, Гит: #{github}, Контакт: #{contact}"
-  end
-
-  private
-
-  def initialize_from_data(id, full_name_initials, github,  contact)
-    @id                  = id
-    @full_name_initials  = full_name_initials
-    @github              = github
-    @contact             = contact
+    "ID: #{id}, ФИО: #{full_name_initials}, Гит: #{git}, Контакт: #{contact}"
   end
 end
