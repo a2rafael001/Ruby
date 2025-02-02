@@ -13,7 +13,7 @@ class StudentShort < Person
       student.full_name_initials,
       id: student.id,
       git: student.git,
-      contact: student.contact_info
+      contact: student.contact
     )
   end
 

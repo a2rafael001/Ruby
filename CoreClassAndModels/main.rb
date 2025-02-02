@@ -28,7 +28,7 @@ begin
   )
   puts student.to_s
   puts "ФИО с инициалами: #{student.full_name_initials}"
-  puts "Контактная информация: #{student.contact_info}"
+  puts "Контактная информация: #{student.contact}"
 rescue ArgumentError => e
   puts "Ошибка: #{e.message}"
 end
@@ -37,14 +37,14 @@ end
 puts "\nПроверка метода set_contacts\n"
 begin
   student.set_contacts(phone: "+98765432100", email: "newemail@mail.com")
-  puts "Обновлённая контактная информация: #{student.contact_info}"
+  puts "Обновлённая контактная информация: #{student.contact}"
 rescue ArgumentError => e
   puts "Ошибка: #{e.message}"
 end
 
 # Создание объекта StudentShort из объекта Student
 puts "\nПроверка класса StudentShort\n"
-puts "\nПроверка метода from_student\n"from_student
+puts "\nПроверка метода from_student\n"
 student_short = StudentShort.from_student(student)
 puts student_short.to_s
 
@@ -69,6 +69,7 @@ puts "Telegram проверяю на валидацию: #{Person.valid_telegram
 
 # Проверка метода validate?
 puts "\nПроверка метода validate?\n"
+
 puts "Данные валидны? #{student.validate?}"
 
 # Итог

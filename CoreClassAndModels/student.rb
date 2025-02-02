@@ -13,7 +13,7 @@ class Student < Person
     self.middle_name = middle_name 
     set_contacts(phone: phone, email: email, telegram: telegram)
   end
- 
+
  # Переопределение сеттеров
   def last_name=(value)
     if Student.name_valid?(value)
@@ -49,35 +49,15 @@ def first_name=(value)
   # Метод для получения краткой информации о студенте
   def to_s
 
-    "ID #{@id}, ФИО: #{full_name_initials}, Гит: #{@git || 'не указан'},  Контакт: #{contact_info},"
+    "ID #{@id}, ФИО: #{full_name_initials}, Гит: #{@git || 'не указан'},  Контакт: #{contact},"
   end
 
-   # Метод для установки полей контактов
-  def set_contacts(phone: nil, email: nil, telegram: nil)
-   if phone &&!Person.valid_phone?(phone)
-      raise ArgumentError, "Номер введен неверно: #{phone}"
-    else
-      @phone = phone
-    end
-    if telegram &&!Person.valid_telegram?(telegram)
-      raise ArgumentError, "Телеграм введен неверно: #{telegram}"
-    else
-      @telegram = telegram
-    end
-    if email && !Person.valid_email?(email)
-      raise ArgumentError, "Email введен неверно: #{email}"
-    else
-      @email = email
-    end
-  end
-
-   # Метод, возвращающий контакт 
- def contact_info
-    contact = []
-    contact << "#{phone}" if phone
-    contact << "#{telegram}" if telegram
-    contact << "#{email}" if email
-    contact.join(' ; ')
+  def contact
+    contact_info = []
+    contact_info << "Телефон: #{phone}" if phone
+    contact_info << "Telegram: #{telegram}" if telegram
+    contact_info << "Email: #{email}" if email
+    contact_info.join(' ; ')
   end
 
   # Метод для получения ФИО с инициалами
@@ -87,14 +67,37 @@ def first_name=(value)
     mn = @middle_name ? middle_name[0] + "." : ""
     "#{last_name} #{fn} #{mn}".strip
   end
-end
+
 
  def get_info
     info=[]
-    info.push("ФИО: #{@last_name} #{fn[0]}.#{@mn[0]}.")
+    info.push("ФИО: #{full_name_initials}.")
     info.push("Git: #{@git}") if git
     info.push ("Номер: #{@phone}") if phone
     info.push ("Telegram: #{@telegram}") if telegram
     info.push ("Email: #{@email}") if email
     info.join(" ; ")
   end
+
+  # Метод для установки значений полей контактов
+  def set_contacts(phone: nil, telegram: nil, email: nil)
+    if phone &&!Person.valid_phone?(phone)
+      raise ArgumentError, "Номер введен неверно: #{phone}"
+    else
+      @phone = phone
+    end
+    if telegram &&!Student.valid_telegram?(telegram)
+      raise ArgumentError, "Телеграм введен неверно: #{telegram}"
+    else
+      @telegram = telegram
+    end
+    if email && !Student.valid_email?(email)
+      raise ArgumentError, "Email введен неверно: #{email}"
+    else
+      @email = email
+    end
+  end
+
+end
+
+#абстрак contact ful_name

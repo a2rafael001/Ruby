@@ -3,9 +3,9 @@ class Person
   attr_reader :id,  :git
 
   # Конструктор
-  def initialize(id: nil,  git: nil)
-    @git = git if git
-    @id = id if id
+  def initialize(id: nil,  git: nil, phone: nil, email: nil, telegram: nil)
+    @git      = git if git
+    @id       = id if id
   end
 
   # Метод класса для проверки телефонного номера
@@ -38,10 +38,10 @@ end
     name.match?(/^[A-Za-zА-Яа-яЁё\s-]+$/)
 end
 
-# Метод для проверки существования контакта и гита
-def validate?
-  git_present? && contact_present?
-end
+# Абстрактный метод
+  def validate?
+    raise NotImplementedError, "#{self.class} необходимо реализовать метод 'validate?'"
+  end
 
 # Методы для проверки наличия контактов и гита
 def contact_present?
@@ -51,5 +51,4 @@ end
 def git_present?
   !@git.nil? && !@git.empty?
 end
-
 end
