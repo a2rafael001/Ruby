@@ -9,9 +9,9 @@ person = Person.new(id: 1, git: "https://github.com/example")
 puts "GitHub: #{person.git}"
 puts "ID: #{person.id}"
 puts "GitHub   проверяю на валидацию: #{Person.valid_git?(person.git)}"
-puts "Телефон  проверяю на валидацию: #{Person.valid_phone?('+12345678901')}"
-puts "Email    проверяю на валидацию: #{Person.valid_email?('example@mail.com')}"
-puts "Telegram проверяю на валидацию: #{Person.valid_telegram?('@example')}"
+puts "Телефон  проверяю на валидацию: #{Student.valid_phone?('+12345678901')}"
+puts "Email    проверяю на валидацию: #{Student.valid_email?('example@mail.com')}"
+puts "Telegram проверяю на валидацию: #{Student.valid_telegram?('@example')}"
 
 # Создание объекта Student
 puts "\n  Проверка класса Student \n "
@@ -63,9 +63,9 @@ end
 # Проверка валидности данных
 puts "\nПроверка валидности данных"
 puts "GitHub   проверяю на валидацию: #{Person.valid_git?('https://github.com/invalid-url')}"
-puts "Телефон  проверяю на валидацию: #{Person.valid_phone?('12345')}"
-puts "Email    проверяю на валидацию: #{Person.valid_email?('invalid_email')}"
-puts "Telegram проверяю на валидацию: #{Person.valid_telegram?('invalid_telegram')}"
+puts "Телефон  проверяю на валидацию: #{Student.valid_phone?('12345')}"
+puts "Email    проверяю на валидацию: #{Student.valid_email?('invalid_email')}"
+puts "Telegram проверяю на валидацию: #{Student.valid_telegram?('invalid_telegram')}"
 
 # Проверка метода validate?
 puts "\nПроверка метода validate?\n"

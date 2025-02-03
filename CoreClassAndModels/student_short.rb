@@ -33,4 +33,7 @@ class StudentShort < Person
   def to_s
     "ID: #{id}, ФИО: #{full_name_initials}, Гит: #{git}, Контакт: #{contact}"
   end
+
+  private_class_method :new
+  private :id=, :git=
 end
