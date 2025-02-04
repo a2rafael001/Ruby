@@ -1,16 +1,18 @@
+require 'date'
 require_relative 'person'
 
 class Student < Person
   # Указываем атрибуты напрямую
-  attr_reader  :last_name, :first_name, :middle_name, :phone, :email, :telegram
+  attr_reader  :last_name, :first_name, :middle_name, :phone, :email, :telegram, :birth_date
 
   # Основной конструктор
-  def initialize( id: ,last_name:, first_name:, middle_name:, phone: nil, email: nil, telegram: nil, git: nil)
+  def initialize( id: ,last_name:, first_name:, middle_name:,birth_date: nil, phone: nil, email: nil, telegram: nil, git: nil)
     # Вызываем конструктор родительского класса для общих атрибутов
     super(id: id , git: git)
     self.last_name = last_name
     self.first_name = first_name
     self.middle_name = middle_name 
+    self.birth_date  = birth_date if birth_date
     set_contacts(phone: phone, email: email, telegram: telegram)
   end
 
@@ -38,6 +40,15 @@ end
    telegram.match?(/^@\w+$/)
   end
 
+   def self.valid_birth?(date)
+    begin
+      Date.strptime(date, '%d-%m-%Y') 
+      true
+    rescue ArgumentError
+      false
+    end
+  end
+
  # Переопределение сеттеров
   def last_name=(value)
     if Student.name_valid?(value)
@@ -62,11 +73,19 @@ def first_name=(value)
       raise ArgumentError, "Отчество введено неверно: #{value}"
     end
   end 
+
+   def birth_date=(birth_date)
+    if Student.valid_birth?(birth_date)
+      @birth_date = Date.strptime(birth_date, '%d-%m-%Y') # Преобразуем строку в объект Date
+    else
+      raise ArgumentError, "Дата рождения введена неверно: #{birth_date}"
+    end
+  end
  
   # Метод для получения краткой информации о студенте
   def to_s
 
-    "ID #{@id}, ФИО: #{full_name_initials}, Гит: #{@git || 'не указан'},  Контакт: #{contact},"
+    "ID #{@id}, ФИО: #{full_name_initials}, Дата рождения: #{@birth_date}, Гит: #{@git || 'не указан'},  Контакт: #{contact},"
   end
 
   def contact
@@ -89,6 +108,7 @@ def first_name=(value)
  def get_info
     info=[]
     info.push("ФИО: #{full_name_initials}.")
+    info.push("Дата рождения: #{@birth_date}")
     info.push("Git: #{@git}") if git
     info.push ("Номер: #{@phone}") if phone
     info.push ("Telegram: #{@telegram}") if telegram

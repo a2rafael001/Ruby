@@ -1,6 +1,7 @@
 require_relative 'person'
 require_relative 'student'
 require_relative 'student_short'
+require_relative 'student_tree'
 
 # Создание объекта Person
 puts "  Проверка класса Person\n  "
@@ -71,6 +72,55 @@ puts "Telegram проверяю на валидацию: #{Student.valid_telegra
 puts "\nПроверка метода validate?\n"
 
 puts "Данные валидны? #{student.validate?}"
+
+puts "\nПроверка класса StudentTree\n"
+student4 = Student.new(
+  id: 4,
+  last_name: "Иванов",
+  first_name: "Иван",
+  middle_name: "Иванович",
+  birth_date: "15-05-2000",
+  phone: "+12345678901",
+  email: "ivanov@example.com",
+  telegram: "@ivanov",
+  git: "https://github.com/ivanov"
+)
+
+student5 = Student.new(
+  id: 5,
+  last_name: "Петров",
+  first_name: "Пётр",
+  middle_name: "Петрович",
+  birth_date: "20-10-1999",
+  phone: "+10987654321",
+  email: "petrov@example.com",
+  telegram: "@petrov",
+  git: "https://github.com/petrov"
+)
+
+student6 = Student.new(
+  id: 6,
+  last_name: "Сидоров",
+  first_name: "Сидор",
+  middle_name: "Сидорович",
+  birth_date: "10-01-2001",
+  phone: "+11234567890",
+  email: "sidorov@example.com",
+  telegram: "@sidorov",
+  git: "https://github.com/sidorov"
+)
+
+# Создаём дерево и вставляем студентов
+tree = StudentTree.new
+tree.insert(student4)
+tree.insert(student5)
+tree.insert(student6)
+
+# Перебор студентов в отсортированном по дате рождения порядке:
+puts "Студенты, отсортированные по дате рождения:"
+tree.each do |student|
+  puts student.to_s
+end
 
 # Итог
 puts "\n=== Все методы успешно проверены ==="
