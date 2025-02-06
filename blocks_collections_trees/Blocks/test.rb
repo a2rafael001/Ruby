@@ -1,4 +1,4 @@
-require_relative 'task'
+require_relative 'block_methods'
 
 def main
   loop do

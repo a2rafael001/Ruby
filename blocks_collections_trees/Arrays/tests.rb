@@ -15,59 +15,59 @@ describe ArrayProcessor do
     end
   end
 
-  describe '#custom_flat_map' do
+  describe '#flat_map' do
     it 'maps and flattens the array based on the block' do
-      result = processor.custom_flat_map { |x| [x, x * 2] }
+      result = processor.flat_map { |x| [x, x * 2] }
       expect(result).to eq([1, 2, 2, 4, 3, 6, 4, 8, 5, 10])
     end
   end
 
-  describe '#custom_one?' do
+  describe '#one?' do
     it 'returns true if exactly one element matches the condition' do
-      expect(processor.custom_one? { |x| x == 3 }).to be true
+      expect(processor.one? { |x| x == 3 }).to be true
     end
 
     it 'returns false if no elements match the condition' do
-      expect(processor.custom_one? { |x| x > 10 }).to be false
+      expect(processor.one? { |x| x > 10 }).to be false
     end
 
     it 'returns false if more than one element matches the condition' do
-      expect(processor.custom_one? { |x| x > 2 }).to be false
+      expect(processor.one? { |x| x > 2 }).to be false
     end
   end
 
-  describe '#custom_inject' do
+  describe '#inject' do
     it 'accumulates values based on the block without an initial value' do
-      result = processor.custom_inject { |sum, x| sum + x }
+      result = processor.inject { |sum, x| sum + x }
       expect(result).to eq(15)
     end
 
     it 'accumulates values based on the block with an initial value' do
-      result = processor.custom_inject(10) { |sum, x| sum + x }
+      result = processor.inject(10) { |sum, x| sum + x }
       expect(result).to eq(25)
     end
   end
 
-  describe '#custom_min_by' do
+  describe '#min_by' do
     it 'returns the element with the minimum value based on the block' do
-      result = processor.custom_min_by { |x| x * -1 }
+      result = processor.min_by { |x| x * -1 }
       expect(result).to eq(5)
     end
 
     it 'returns nil for an empty array' do
       empty_processor = described_class.new([])
-      expect(empty_processor.custom_min_by { |x| x }).to be_nil
+      expect(empty_processor.min_by { |x| x }).to be_nil
     end
   end
 
-  describe '#custom_find' do
+  describe '#find' do
     it 'returns the first element matching the condition' do
-      result = processor.custom_find { |x| x > 3 }
+      result = processor.find { |x| x > 3 }
       expect(result).to eq(4)
     end
 
     it 'returns nil if no element matches the condition' do
-      result = processor.custom_find { |x| x > 10 }
+      result = processor.find { |x| x > 10 }
       expect(result).to be_nil
     end
   end

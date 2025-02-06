@@ -1,4 +1,6 @@
 class ArrayProcessor
+  attr_reader :array
+
   def initialize(array)
     @array = array.dup.freeze
   end
@@ -6,18 +8,22 @@ class ArrayProcessor
   def elements
     @array
   end
-end
 
- def custom_flat_map
+def all?
+    @array.each { |element| return false unless yield(element) }
+    true
+  end
+
+ def flat_map
     result = []
     @array.each do |element|
       result.concat(yield(element))
     end
     result
   end
-end
 
-def custom_one?
+
+def one?
     count = 0
     @array.each do |element|
       count += 1 if yield(element)
@@ -25,9 +31,9 @@ def custom_one?
     end
     count == 1
   end
-end
 
-def custom_inject(initial = nil)
+
+def inject(initial = nil)
     accumulator = initial || @array.first
     start_index = initial.nil? ? 1 : 0
     @array[start_index..].each do |element|
@@ -35,9 +41,9 @@ def custom_inject(initial = nil)
     end
     accumulator
   end
-end
 
-def custom_min_by
+
+def min_by
     return nil if @array.empty?
     min_element = @array.first
     min_value = yield(min_element)
@@ -52,7 +58,7 @@ def custom_min_by
     min_element
   end
 
-  def custom_find
+  def find
     @array.each do |element|
       return element if yield(element)
     end
