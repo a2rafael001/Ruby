@@ -1,19 +1,21 @@
 class ArrayProcessor
-  attr_reader :array
+
 
   def initialize(array)
-    @array = array.dup.freeze
+    @array = array.dup.freeze #Копирует и замораживает массив, чтобы он был нельзя изменить 
   end
 
   def elements
     @array
   end
 
+#Проверяет, соответствуют ли все элементы блоку
 def all?
     @array.each { |element| return false unless yield(element) }
     true
   end
 
+#Применяет блок и разворачивает массив
  def flat_map
     result = []
     @array.each do |element|
@@ -22,7 +24,7 @@ def all?
     result
   end
 
-
+#Проверяет, есть ли ровно один элемент, удовлетворяющий блоку
 def one?
     count = 0
     @array.each do |element|
@@ -32,7 +34,7 @@ def one?
     count == 1
   end
 
-
+#Выполняет свёртку массива
 def inject(initial = nil)
     accumulator = initial || @array.first
     start_index = initial.nil? ? 1 : 0
@@ -42,7 +44,7 @@ def inject(initial = nil)
     accumulator
   end
 
-
+#Ищет минимальный элемент по критерию
 def min_by
     return nil if @array.empty?
     min_element = @array.first
@@ -58,6 +60,29 @@ def min_by
     min_element
   end
 
+#Разбивает массив на группы, используя
+  def group_by
+  result = []
+  current_chunk = []
+  current_key = nil
+
+  @arr.each do |element|
+    key = yield(element)
+
+    if key != current_key
+      result << [current_key, current_chunk] unless current_chunk.empty?
+      current_key = key
+      current_chunk = []
+    end
+
+    current_chunk << element
+  end
+  result << [current_key, current_chunk] unless current_chunk.empty?
+  result
+end
+
+
+#Находит первый элемент, соответствующий блоку
   def find
     @array.each do |element|
       return element if yield(element)
