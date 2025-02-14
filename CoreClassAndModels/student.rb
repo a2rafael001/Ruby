@@ -2,6 +2,7 @@ require 'date'
 require_relative 'person'
 
 class Student < Person
+  include Comparable
   # Указываем атрибуты напрямую
   attr_reader  :last_name, :first_name, :middle_name, :phone, :email, :telegram, :birth_date
 
@@ -50,29 +51,53 @@ end
   end
 
  # Переопределение сеттеров
-  def last_name=(value)
-    if Student.name_valid?(value)
-      @last_name = value
+  def last_name=(ln)
+    if Student.name_valid?(ln)
+      @last_name = ln
     else
-      raise ArgumentError, "Фамилия введена неверно: #{value}"
+      raise ArgumentError, "Фамилия введена неверно: #{ln}"
     end
   end 
 
-def first_name=(value)
-    if Student.name_valid?(value)
-      @first_name = value
+def first_name=(fn)
+    if Student.name_valid?(fn)
+      @first_name = fn
     else
-      raise ArgumentError, "Имя введено неверно: #{value}"
+      raise ArgumentError, "Имя введено неверно: #{fn}"
     end
   end
 
-  def middle_name=(value)
-    if Student.name_valid?(value)
-      @middle_name = value
+  def middle_name=(mn)
+    if Student.name_valid?(mn)
+      @middle_name = mn
     else
-      raise ArgumentError, "Отчество введено неверно: #{value}"
+      raise ArgumentError, "Отчество введено неверно: #{mn}"
     end
   end 
+
+   def phone=(phone)
+    if Student.valid_phone?(phone)
+      @phone = phone
+    else
+      raise ArgumentError, "phone введено неверно: #{phone}"
+    end
+  end
+
+  def email=(email)
+    if Student.valid_email?(email)
+      @email = email
+    else
+      raise ArgumentError, "email введено неверно: #{email}"
+    end
+  end
+
+  def telegram=(telegram)
+    if Student.valid_telegram?(telegram)
+      @telegram = telegram
+    else
+      raise ArgumentError, "telegram введено неверно: #{telegram}"
+    end
+  end
 
    def birth_date=(birth_date)
     if Student.valid_birth?(birth_date)
@@ -81,12 +106,18 @@ def first_name=(value)
       raise ArgumentError, "Дата рождения введена неверно: #{birth_date}"
     end
   end
- 
+
   # Метод для получения краткой информации о студенте
   def to_s
 
     "ID #{@id}, ФИО: #{full_name_initials}, Дата рождения: #{@birth_date}, Гит: #{@git || 'не указан'},  Контакт: #{contact},"
   end
+
+   def <=>(other)
+    return nil unless other.is_a?(Student)
+    birth_date <=> other.birth_date
+  end
+ 
 
   def contact
     contact_info = []
