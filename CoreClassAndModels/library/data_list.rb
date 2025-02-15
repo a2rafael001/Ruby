@@ -38,11 +38,11 @@ class DataList
   private
 
   def column_names
-    raise NotImplementedError, 'Метод реализован в наследнике.'
+    raise NotImplementedError, 'Метод реализован в дочерном классе.'
   end
 
   def build_row(student_short)
-    raise NotImplementedError, 'Метод реализован в наследнике.'
+    raise NotImplementedError, 'Метод реализован в дочерном классе.'
   end
 
 end
