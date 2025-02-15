@@ -17,12 +17,10 @@ class DataTable
     @data[row][column]
   end
 
-  # Возвращает количество строк в таблице
   def row_count
     @data.size
   end
 
-  # Возвращает количество столбцов в таблице
   def column_count
     @data[0].size
   end
