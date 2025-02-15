@@ -14,11 +14,11 @@ class DataTable
   def get_element(row, column)
     raise IndexError, "Неверный номер строки" if row < 0 || row >= row_count
     raise IndexError, "Неверный номер столбца" if column < 0 || column >= column_count
-    @data[row][column]
+    data[row][column]
   end
 
   def row_count
-    @data.size
+    data.size
   end
 
   def column_count

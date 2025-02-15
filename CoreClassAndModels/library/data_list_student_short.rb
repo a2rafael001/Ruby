@@ -2,14 +2,13 @@ require_relative 'data_list'
 require_relative 'data_table'
 
 class DataListStudentShort < DataList
-
-  private
-
-  def column_names
-    ["№", "Фамилия И.О.", "git", "Контакт"]
+ def get_names
+  ["№","Фамилия И.О.", "GitHub", "Контакт"]
+ end
+ def get_object_array
+  raise ArgumentError, "Данные отсутствует" if data.empty?
+  data.map.wich_index(1) do |object,index|
+    [index,object.surname_initials,object.git,object.contact]
   end
-
-  def build_row(student_short)
-    [index + @offset, student_short.initials, student_short.git, student_short.contact]
-  end
+end
 end
