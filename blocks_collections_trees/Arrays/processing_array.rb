@@ -62,25 +62,13 @@ def min_by
 
 #Разбивает массив на группы, используя
   def group_by
-  result = []
-  current_chunk = []
-  current_key = nil
-
-  @arr.each do |element|
+  result = Hash.new { |hash, key| hash[key] = [] }
+  @array.each do |element|
     key = yield(element)
-
-    if key != current_key
-      result << [current_key, current_chunk] unless current_chunk.empty?
-      current_key = key
-      current_chunk = []
-    end
-
-    current_chunk << element
+    result[key] << element
   end
-  result << [current_key, current_chunk] unless current_chunk.empty?
   result
 end
-
 
 #Находит первый элемент, соответствующий блоку
   def find
