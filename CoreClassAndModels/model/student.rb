@@ -43,7 +43,7 @@ end
 
    def self.valid_birth?(date)
     begin
-      Date.strptime(date, '%d-%m-%Y') 
+      Date.strptime(date, '%Y-%m-%d') 
       true
     rescue ArgumentError
       false
@@ -101,7 +101,7 @@ def first_name=(fn)
 
    def birth_date=(birth_date)
     if Student.valid_birth?(birth_date)
-      @birth_date = Date.strptime(birth_date, '%d-%m-%Y') # Преобразуем строку в объект Date
+      @birth_date = Date.strptime(birth_date, '%Y-%m-%d') # Преобразуем строку в объект Date
     else
       raise ArgumentError, "Дата рождения введена неверно: #{birth_date}"
     end

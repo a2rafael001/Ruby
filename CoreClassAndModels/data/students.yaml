@@ -1,0 +1,28 @@
+---
+- :id: 1
+  :last_name: Заирова
+  :first_name: Диана
+  :middle_name: Саид-Хусейнова
+  :git: https://github.com/diana
+  :birth_date: 0012-01-18
+  :phone: '12345678901'
+  :email: diana@example.com
+  :telegram: "@borbaAxmatSila"
+- :id: 2
+  :last_name: 'Магомедович '
+  :first_name: 'Хасбулла '
+  :middle_name: 'Магомедов '
+  :git: https://github.com/xasbulla
+  :birth_date: 0007-07-18
+  :phone: '89123456789'
+  :email: xasbulla@mail.com
+  :telegram: "@xasbulla"
+- :id: 3
+  :last_name: Антонов
+  :first_name: Антон
+  :middle_name: Антонович
+  :git: https://github.com/antonov
+  :birth_date: 0017-04-18
+  :phone: '12345678901'
+  :email: antonov@example.com
+  :telegram: "@antoto"

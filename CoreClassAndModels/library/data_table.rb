@@ -1,4 +1,5 @@
 class DataTable
+ private attr_reader :data
   
   def initialize(data)
     self.data = data
@@ -18,14 +19,11 @@ class DataTable
   end
 
   def row_count
-    data.size
+    @data.size
   end
 
   def column_count
     @data[0].size
   end
 
-  private
-
-  attr_reader :data
 end
