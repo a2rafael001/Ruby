@@ -1,48 +1,58 @@
-class DataList  
-  private attr_reader :data, :column_names 
-  private attr_accessor :selected
+class DataList
   
-  def initialize(data,column_names=[])
+  private attr_reader :data, :column_names
+  private attr_accessor :selected
+
+  def initialize(data, column_names = [])
     self.data = data
-    column_names=column_names
+    self.column_names = column_names
     @selected = []
   end
 
+  def set_data(new_data)
+    raise ArgumentError, "Объект должен являться массивом" unless new_data.is_a?(Array)
+    self.data = new_data
+  end
+
   def select(number)
-    raise ArgumentError, "Элемент по указанному номеру не существует" if @data[number].nil?
-    selected << number unless @selected.include?(number)
-    @data[number]
+    raise ArgumentError, "Индекс выходит за пределы" unless number.between?(0, data.length - 1)
+    selected << number
   end
 
   def get_selected
-    @selected
+    selected
+  end
+
+  def build_table
+    [get_names] + get_data
+  end
+
+  def get_names
+    column_names
   end
 
   def get_data
-      index = 0
-      data = []
-      selected = self.get_selected
-      selected.each do |index|
-        obj = @data[index]
-        row = get_objects_array(index, obj)
-        data.append(row)
-      end
-      DataTable.new(data)
-    end
+    get_objects_array
+  end
 
-    def data=(data)
-      raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
-      @data = data
-    end
+  private
 
-    private
+  def data=(data)
+    raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
+    @data = data
+  end
 
-    def get_names
-      raise NotImplementedError, 'Метод реализован в наследнике.'
-    end
+  def column_names=(names)
+      raise ArgumentError, "Наименования столбцов не могут быть изменены" unless @column_names.nil?
+      @column_names = names
+  end
 
-    def get_objects_array(index, element)
-      raise NotImplementedError, 'Метод реализован в наследнике.'
-    end
+  def column_names
+    raise NotImplementedError, "Метод не реализован в классе"
+  end
+
+  def get_objects_array
+    raise NotImplementedError, "Метод не реализован в классе"
+  end
 
 end

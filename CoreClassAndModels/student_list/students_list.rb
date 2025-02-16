@@ -52,7 +52,7 @@ class StudentsList
   end
 
   def sort_by_surname_initials
-    self.students.sort_by! { |student| student.surname_initials }
+    self.students.sort_by! { |student| student.full_name_initials }
   end
 
   def add_student(student)
@@ -62,12 +62,12 @@ class StudentsList
 
     new_id = self.students.empty? ? 1 : self.students.map(&:id).max + 1
     student_with_new_id = Student.new(
-      surname: student.second_name,
+      last_name: student.second_name,
       first_name: student.first_name,
-      patronymic: student.patronymic,
+      middle_name: student.patronymic,
       id: new_id,
       git: student.git,
-      birthdate: student.birthdate,
+      birth_date: student.birth_date,
       phone: student.phone_number,
       email: student.email,
       telegram: student.telegram

@@ -18,7 +18,7 @@ class JSONStrategy < Strategy
                 first_name: student.first_name,
                 middle_name: student.middle_name,
                 git: student.git,
-                birthdate: student.birthdate,
+                birth_date: student.birthdate,
                 phone: student.phone,
                 email: student.email,
                 telegram: student.telegram
