@@ -4,7 +4,7 @@
   :first_name: Диана
   :middle_name: Саид-Хусейнова
   :git: https://github.com/diana
-  :birth_date: 0012-01-18
+  :birth_date: 2005-01-12
   :phone: '12345678901'
   :email: diana@example.com
   :telegram: "@borbaAxmatSila"
@@ -13,7 +13,7 @@
   :first_name: 'Хасбулла '
   :middle_name: 'Магомедов '
   :git: https://github.com/xasbulla
-  :birth_date: 0007-07-18
+  :birth_date: 2002-07-07
   :phone: '89123456789'
   :email: xasbulla@mail.com
   :telegram: "@xasbulla"
@@ -22,7 +22,7 @@
   :first_name: Антон
   :middle_name: Антонович
   :git: https://github.com/antonov
-  :birth_date: 0017-04-18
+  :birth_date: 2001-04-17
   :phone: '12345678901'
   :email: antonov@example.com
   :telegram: "@antoto"

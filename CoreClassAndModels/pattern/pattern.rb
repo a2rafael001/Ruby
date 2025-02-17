@@ -45,7 +45,6 @@ class Truck < Car
   end
 end
 
-def client_code
   puts "Обслуживание седана:"
   sedan = Sedan.new
   sedan.service
@@ -53,6 +52,4 @@ def client_code
   puts "Обслуживание грузовика:"
   truck = Truck.new
   truck.service
-end
 
-client_code
