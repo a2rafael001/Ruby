@@ -185,6 +185,6 @@ yaml_strategy = YAMLStrategy.new
 
 #функция которое поменет filepath и страгедию
 
-require_relative 'data_base/schema_changes/DB_connection'
-connection = StudentsDBConection.connection
+require_relative 'data_base/DB_connection'
+connection = StudentsDBConnection.connection
 puts "Connected to database: #{connection.db}"

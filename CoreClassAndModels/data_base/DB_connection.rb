@@ -1,13 +1,13 @@
 require 'mysql2'
 
-class StudentsDBConnection
-  def self.connection
-    @connection ||= Mysql2::Client.new(
-      host: 'localhost',
-      username: 'root',
-      password: 'newpassword',
-      database: 'studentsDB',
-      port: 3306
-    )
-  end
+begin
+  client = Mysql2::Client.new(
+    host: 'localhost',
+    username: 'root',
+    password: 'newpassword', # Замените на ваш пароль
+    database: 'studentsdb'
+  )
+  puts "Connected to database: #{client.query('SELECT DATABASE()').first['DATABASE()']}"
+rescue Mysql2::Error => e
+  puts "Error: #{e.message}"
 end

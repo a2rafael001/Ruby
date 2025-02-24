@@ -1,58 +1,51 @@
-class DataList
-  
-  private attr_reader :data, :column_names
-  private attr_accessor :selected
+class DataList  
+  attr_reader :data
+  attr_accessor :selected
 
-  def initialize(data, column_names = [])
-    self.data = data
-    self.column_names = column_names
-    @selected = []
-  end
-
-  def set_data(new_data)
-    raise ArgumentError, "Объект должен являться массивом" unless new_data.is_a?(Array)
-    self.data = new_data
+  def initialize(elements)
+    @column_names = column_names
+    @data = elements
+    @selected=[]
   end
 
   def select(number)
-    raise ArgumentError, "Индекс выходит за пределы" unless number.between?(0, data.length - 1)
-    selected << number
+    element = @data[number]
+    if element && !@selected.include?(element.id)
+      @selected << number
+    end
   end
 
   def get_selected
-    selected
-  end
-
-  def build_table
-    [get_names] + get_data
+    @selected.dup
   end
 
   def get_names
-    column_names
+    @column_names
   end
 
   def get_data
-    get_objects_array
+    result = [self.get_names]
+    self.selected.each do |selected_index|
+      obj = self.data[selected_index]
+      row = build_row(obj) 
+      result << row
+    end
+    DataTable.new(result)
+  end
+
+  def data=(data)
+    @data = data
+    @selected = []
   end
 
   private
 
-  def data=(data)
-    raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
-    @data = data
-  end
-
-  def column_names=(names)
-      raise ArgumentError, "Наименования столбцов не могут быть изменены" unless @column_names.nil?
-      @column_names = names
-  end
-
   def column_names
-    raise NotImplementedError, "Метод не реализован в классе"
+    raise NotImplementedError, 'Метод реализован в дочернем классе.'
   end
 
-  def get_objects_array
-    raise NotImplementedError, "Метод не реализован в классе"
+  def build_row(student_short)
+    raise NotImplementedError, 'Метод реализован в дочернем классе.'
   end
 
 end
