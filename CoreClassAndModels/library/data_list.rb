@@ -1,22 +1,19 @@
 class DataList  
-  attr_reader :data
-  attr_accessor :selected
+  attr_reader :data, :column_names, :selected
 
-  def initialize(elements)
-    @column_names = column_names
-    @data = elements
-    @selected=[]
+  def initialize(data)
+    self.data = data
+    @selected = []
   end
 
   def select(number)
-    element = @data[number]
-    if element && !@selected.include?(element.id)
-      @selected << number
-    end
+    raise ArgumentError, "Элемент по указанному номеру не существует" if @data[number].nil?
+    selected << number unless @selected.include?(number)
+    @data[number]
   end
 
   def get_selected
-    @selected.dup
+    @selected
   end
 
   def get_names
@@ -24,28 +21,28 @@ class DataList
   end
 
   def get_data
-    result = [self.get_names]
-    self.selected.each do |selected_index|
-      obj = self.data[selected_index]
-      row = build_row(obj) 
-      result << row
+    data = []
+    self.selected.each do |index|
+      obj = @data[index]
+      row = build_row(obj)
+      data.append(row)
     end
-    DataTable.new(result)
+    DataTable.new(data)
   end
 
   def data=(data)
+    raise ArgumentError, "Объект должен являться массивом" unless data.is_a?(Array)
     @data = data
-    @selected = []
   end
 
   private
 
   def column_names
-    raise NotImplementedError, 'Метод реализован в дочернем классе.'
+    raise NotImplementedError, 'Метод реализован в наследнике.'
   end
 
   def build_row(student_short)
-    raise NotImplementedError, 'Метод реализован в дочернем классе.'
+    raise NotImplementedError, 'Метод реализован в наследнике.'
   end
 
 end

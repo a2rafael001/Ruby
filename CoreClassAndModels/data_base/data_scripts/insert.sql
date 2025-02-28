@@ -2,18 +2,6 @@ CREATE DATABASE studentsdb;
 
 USE studentsdb;
 
-CREATE TABLE students (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    last_name VARCHAR(255),
-    first_name VARCHAR(255),
-    middle_name VARCHAR(255),
-    birth_date DATE,
-    phone VARCHAR(15),
-    telegram VARCHAR(255),
-    email VARCHAR(255),
-    git VARCHAR(255)
-);
-
 INSERT INTO students (last_name, first_name, middle_name, birth_date, phone, telegram, email, git) VALUES
 ('Иванов', 'Иван', 'Иванович', '2003-03-05', '179991112233', '@ivanov_il', 'ivanov@mail.ru', 'https://github.com/ivanovil'),
 ('Петров', 'Алексей', 'Сергеевич', '2004-06-12', '179992223344', '@petrov_as', 'petrov@mail.ru', 'https://github.com/petrov_as'),

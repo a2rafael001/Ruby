@@ -1,48 +1,29 @@
 class DataTable
-  
+  private attr_reader :data
+
   def initialize(data)
     self.data = data
   end 
 
-  def get_element(num_of_row, num_of_column)
-    deep_dup(data)[num_of_row][num_of_column]
+  private def data=(data)
+    unless data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }
+      raise ArgumentError, "Объект должен являться двумерным массивом"
+    end
+    @data = data
   end
 
   def rows_count
-    data.size
+    @data.size
   end
 
   def columns_count
-    return 0 if data.empty?
-    
     @data[0].size
   end
 
-  def to_s 
-    data.inspect
+  def get_element(row, col)
+    raise IndexError, "Неверный индекс строки" if row < 0 || row >= rows_count
+    raise IndexError, "Неверный индекс столбца" if col < 0 || col >= columns_count
+
+    data[row][col]
   end
-
-  private
-
-  attr_reader :data
-
-  def data=(data)
-    unless data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }
-      raise ArgumentError, "Данные должны быть в виде двумерного массива"
-    end
-    @data = deep_dup(data)
-  end
-
-  def deep_dup(element)
-    if element.is_a?(Array)
-      element.map { |sub_element| deep_dup(sub_element) }
-    else
-      begin
-        element.dup
-      rescue
-        element
-      end
-    end
-  end
-
 end
